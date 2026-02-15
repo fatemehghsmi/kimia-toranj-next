@@ -1,0 +1,107 @@
+.blogPage {
+  padding: 20px;
+}
+
+.title {
+  text-align: center;
+  font-size: 34px;
+  margin-bottom: 40px;
+  color: #2c3e50;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: right;
+}
+
+.card {
+  display: flex;
+  flex-direction: row-reverse; /* RTL: image on the right */
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.cardImageWrapper {
+  position: relative; /* required for Image fill */
+  flex: 0 0 200px; /* desktop: fixed width */
+  aspect-ratio: 4/5; /* keeps height proportional */
+  overflow: hidden;
+}
+
+.cardImage {
+  object-fit: cover;
+}
+
+.cardContent {
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cardTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.cardExcerpt {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+  direction: rtl;
+}
+
+/* Skeleton styles */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #eee 25%, #f5f5f5 50%, #eee 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeletonText {
+  height: 16px;
+  margin: 8px 0;
+  border-radius: 4px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 800px) {
+  .blogPage {
+    padding: 20px;
+    margin-top: 60px;
+  }
+  .card {
+    flex-direction: column; /* stack image on top for small screens */
+  }
+
+  .cardImageWrapper {
+    position: relative;
+    flex: none;
+    width: 100%;
+    aspect-ratio: 4/5;
+  }
+}

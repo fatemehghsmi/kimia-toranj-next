@@ -11,6 +11,7 @@ export default async function Collections() {
   try {
     const res = await axios.get(`${API_URL}api/store/collections/`);
     collections = Array.isArray(res.data) ? res.data : [];
+    collections = collections.filter(collection => collection.parent === null)
   } catch (error) {
     return <div className={styles.error}>خطا در دریافت اطلاعات</div>;
   }
@@ -44,11 +45,12 @@ export default async function Collections() {
                 width={400}
                 height={300}
                 loading="lazy"
+                unoptimized
               />
               <div className={styles.overlay}>
-                <div className={styles.description}>
+                <h3 className={styles.description}>
                   {collection.description || collection.title}
-                </div>
+                </h3>
               </div>
             </Link>
           );

@@ -1,0 +1,16 @@
+.headerDesktop {
+  display: block;
+}
+
+.headerMobile {
+  display: none;
+}
+
+@media (max-width: 768) {
+  .headerDesktop {
+    display: none;
+  }
+  .headerMobile {
+    display: block;
+  }
+}

@@ -23,8 +23,8 @@ export default async function SpecialProducts() {
       <div className={styles.header}>
         <div className={styles.titleContainer}>
           <h2 className={styles.title}>محصولات تخفیف دار</h2>
-          <MdLocalOffer className={styles.icon} />
-          <span className={styles.percent}>%</span>
+          {/* <MdLocalOffer className={styles.icon} />
+          <span className={styles.percent}>%</span> */}
         </div>
         <Link href="/shop" className={styles.shopLink}>
           مشاهده همه محصولات

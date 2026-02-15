@@ -6,10 +6,10 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 import axiosInstance from "@/utils/axiosInstance";
-import axiosInstanceNoRedirect from "@/utils/axiosInstanceNoRedirect";
 import { formatPrice } from "@/utils/formatPrice";
 import { API_URL } from "@/config/config";
 import { useCartStore } from "@/store/cartStore";
+import { useAuthStore } from "@/store/authStore";
 
 import styles from "./HeaderDesktop.module.css";
 
@@ -32,38 +32,24 @@ export default function HeaderDesktop() {
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const debounceRef = useRef();
   const menuRef = useRef();
   const suggestionsRef = useRef();
   const router = useRouter();
 
-  // Zustand store hooks
+  // Zustand stores
   const cartCount = useCartStore((state) => state.cartCount());
   const fetchCartFromBackend = useCartStore(
     (state) => state.fetchCartFromBackend
   );
+  const { isLoggedIn, checkAuth } = useAuthStore();
 
   // Fetch cart + auth on mount
   useEffect(() => {
     fetchCartFromBackend();
-
-    const checkAuth = async () => {
-      try {
-        const response = await axiosInstanceNoRedirect.get(
-          "api/store/customer/me/"
-        );
-        if (response.status === 200 && response.data) {
-          setIsLoggedIn(true);
-        }
-      } catch {
-        setIsLoggedIn(false);
-      }
-    };
-
     checkAuth();
-  }, [fetchCartFromBackend]);
+  }, [fetchCartFromBackend, checkAuth]);
 
   // Close menus on outside click or scroll
   useEffect(() => {
@@ -147,9 +133,9 @@ export default function HeaderDesktop() {
             src="/logo.png"
             alt="کیمیاترنج"
             className={styles.logo}
-            width={120} // ✅ required in next/image
-            height={40} // adjust to your actual logo ratio
-            priority // optional: preload for faster LCP
+            width={120}
+            height={40}
+            priority
           />
         </Link>
 
@@ -185,13 +171,65 @@ export default function HeaderDesktop() {
                     setSearchTerm("");
                   }}
                 >
-                  <div className={styles.suggestionTitle}>{prod.title}</div>
-                  <div className={styles.suggestionMeta}>
-                    {prod.collection?.title} •{" "}
-                    {formatPrice(
-                      prod.variants?.[0]?.price?.toLocaleString() || "0"
-                    )}{" "}
-                    تومان
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "12px",
+                    }}
+                  >
+                    {/* تصویر محصول */}
+                    {prod.images &&
+                    prod.images.length > 0 &&
+                    prod.images[0].image ? (
+                      <div
+                        style={{
+                          width: "80px",
+                          height: "80px",
+                          flexShrink: 0,
+                          borderRadius: "4px",
+                          overflow: "hidden",
+                        }}
+                      >
+                        <img
+                          src={prod.images[0].image}
+                          alt={prod.title}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                          }}
+                        />
+                      </div>
+                    ) : (
+                      <div
+                        style={{
+                          width: "40px",
+                          height: "40px",
+                          flexShrink: 0,
+                          borderRadius: "4px",
+                          backgroundColor: "#f0f0f0",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#999",
+                          fontSize: "12px",
+                        }}
+                      >
+                        بدون تصویر
+                      </div>
+                    )}
+
+                    <div style={{ flex: 1 }}>
+                      <div className={styles.suggestionTitle}>{prod.title}</div>
+                      <div className={styles.suggestionMeta}>
+                        {prod.collection?.title} {" "}
+                        {formatPrice(
+                          prod.variants?.[0]?.price?.toLocaleString() || "0"
+                        )}{" "}
+                        تومان
+                      </div>
+                    </div>
                   </div>
                 </li>
               ))}
@@ -225,11 +263,6 @@ export default function HeaderDesktop() {
               <Link href="/gift-selector">
                 <li>
                   کادو چی بخرم <GoGift />
-                </li>
-              </Link>
-              <Link href="/about">
-                <li>
-                  درباره ما <BsFileEarmarkPerson />
                 </li>
               </Link>
               <Link href="/">

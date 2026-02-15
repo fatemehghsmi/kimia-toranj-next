@@ -1,0 +1,93 @@
+/* wrapper to position toggle + nav together */
+.wrapper {
+  position: relative;
+}
+
+/* ─── Desktop: hide toggle, show sidebar ───────────────────────────────── */
+.toggleButton {
+  display: none;
+border-radius: 10px;
+}
+
+/* your original desktop sidebar styles */
+.sidebarNav {
+  margin-right: 30px;
+  direction: rtl;
+  padding: 10px;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+}
+
+.link {
+  display: block;
+  padding: 10px 15px;
+  font-size: 25px;
+  color: #023047;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.link:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.active {
+  background-color: var(--primary-color);
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* ─── Mobile: show toggle, hide sidebar by default ───────────────────────── */
+@media (max-width: 768px) {
+  .toggleButton {
+    display: block;
+    background: var(--primary-color);
+    color: #fff;
+    width: 100%;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  /* simple hamburger bars */
+  .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 4px 0;
+    background-color: var(--primary-color);
+    transition: 0.3s;
+  }
+
+  .sidebarNav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    margin-top: 5px;
+    /* center anchor point */
+    left: 50%;
+    transform: translateX(-50%);
+    /* span full viewport width */
+    width: 100vw;
+    max-width: 100%;
+    background: white;
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    z-index: 1000;
+    box-sizing: border-box;
+  }
+
+  /* When .open is added, show the nav */
+  .sidebarNav.open {
+    display: block;
+  }
+
+  .link {
+    font-size: 18px;
+    padding: 8px 12px;
+  }
+}

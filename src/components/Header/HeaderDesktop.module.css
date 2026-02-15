@@ -188,59 +188,80 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: none;
+  border: none;
 }
 
 /* ───────────────────────────────────────────────────────
    Autocomplete Suggestions Dropdown
    ─────────────────────────────────────────────────────── */
-.suggestionsList {
-  position: absolute;
-  top: calc(100% + 4px);
-  right: 0;
-  left: auto;
-  width: 70%; /* match searchBox width */
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  list-style: none;
-  margin: 4px 0 0;
-  padding: 0;
-  z-index: 10;
-  direction: rtl;
-}
-
-.suggestionItem {
-  padding: 10px 16px;
-  cursor: pointer;
-  font-size: 16px;
-  border-bottom: 1px solid #f0f0f0;
-  display: flex;
-  flex-direction: column; 
-}
-
-.suggestionItem a {
-  text-decoration: none;
-}
-
-.suggestionItem:last-child {
-  border-bottom: none;
-}
-
-.suggestionItem:hover {
-  background-color: #f9f9f9;
-}
-
-.suggestionTitle {
-  font-weight: 500;
-  color: #023047;
-  margin-bottom: 4px;
-}
-
-.suggestionMeta {
-  font-size: 14px;
-  color: #777;
-}
+   .suggestionsList {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    left: auto;
+    width: 70%; /* match searchBox width */
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0;
+    z-index: 10;
+    direction: rtl;
+  }
+  
+  .suggestionItem {
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 16px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    align-items: center; /* برای تراز عمودی بهتر */
+    gap: 12px; /* فاصله بین عکس و متن */
+  }
+  
+  .suggestionItem a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+  
+  .suggestionItem:last-child {
+    border-bottom: none;
+  }
+  
+  .suggestionItem:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .suggestionTitle {
+    font-weight: 500;
+    color: #023047;
+    margin-bottom: 4px;
+  }
+  
+  .suggestionMeta {
+    font-size: 14px;
+    color: #777;
+  }
+  
+  .suggestionItem .suggestionImage {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .suggestionItem .suggestionImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
 /* ───────────────────────────────────────────────────────
    Hamburger Menu

@@ -93,7 +93,7 @@ export default function PriceBox({
           </button>
 
           {/* Uncomment if you want installment payment in Next.js */}
-          {/* <button className={styles.installmentPayment}>
+          <button className={styles.installmentPayment}>
             <Link
               href={`/installment-payment?price=${
                 hasPromotion ? discountedPrice : price
@@ -103,7 +103,7 @@ export default function PriceBox({
               پرداخت اقساطی
               <MdOutlineReceiptLong className={styles.installmentPaymentIcon} />
             </Link>
-          </button> */}
+          </button>
         </>
       )}
     </div>

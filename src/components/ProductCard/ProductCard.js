@@ -9,7 +9,7 @@ export default function ProductCard({ product }) {
   const variant = product.variants?.[0] || {};
   const stock = variant.stock ?? 0;
 
-  // Always work with a safe array
+  // Safe promotions array
   const promotions = Array.isArray(product.promotions)
     ? product.promotions
     : [];
@@ -24,7 +24,7 @@ export default function ProductCard({ product }) {
   const imageSrc =
     Array.isArray(product.images) && product.images.length > 0
       ? product.images[0].image
-      : "/placeholder.jpg"; // put placeholder.jpg in /public
+      : "/placeholder.jpg"; // fallback
 
   return (
     <Link
@@ -33,34 +33,44 @@ export default function ProductCard({ product }) {
       aria-label={`مشاهده ${product.title}`}
     >
       <div className={styles.card}>
-        <Image
-          src={imageSrc}
-          alt={product.title}
-          className={styles.img}
-          loading="lazy"
-          width={200}
-          height={190}
-        />
+        {/* Image wrapper enforces aspect ratio */}
+        <div className={styles.imgWrapper}>
+          <Image
+            src={imageSrc}
+            alt={product.title}
+            className={styles.img}
+            fill
+            sizes="(max-width: 768px) 100vw, 250px"
+            loading="lazy"
+            unoptimized
+          />
+        </div>
 
+        {/* Title */}
         <h2 className={styles.title}>{toPersianDigits(product.title)}</h2>
 
-        {stock > 0 && stock < 4 && (
-          <span className={styles.stock}>
-            تنها {toPersianDigits(stock)} عدد در انبار باقی مانده
-          </span>
-        )}
+        {/* Info row: stock OR promotion OR empty placeholder */}
+        <div className={styles.infoRow}>
+          {stock > 0 && stock < 4 ? (
+            <span className={styles.stock}>
+              تنها {toPersianDigits(stock)} عدد در انبار باقی مانده
+            </span>
+          ) : hasPromotion ? (
+            <span className={styles.discountBadge}>
+              {toPersianDigits(discountPercent)}٪ تخفیف
+            </span>
+          ) : (
+            <span style={{ visibility: "hidden" }}>placeholder</span>
+          )}
+        </div>
 
+        {/* Price / Call to action */}
         {stock > 0 ? (
           <div className={styles.priceWrapper}>
             {hasPromotion && variant.price && (
-              <>
-                <span className={styles.oldPrice}>
-                  {formatPrice(variant.price)} تومان
-                </span>
-                <span className={styles.discountBadge}>
-                  {toPersianDigits(discountPercent)}٪ تخفیف
-                </span>
-              </>
+              <span className={styles.oldPrice}>
+                {formatPrice(variant.price)} تومان
+              </span>
             )}
             <button className={styles.price}>
               {formatPrice(discountedPrice)} تومان

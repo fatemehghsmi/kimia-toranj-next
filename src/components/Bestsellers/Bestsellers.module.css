@@ -1,11 +1,15 @@
-/* CONTAINER: no box, just spacing */
+/* —————————————————————————————
+   Container
+   ————————————————————————————— */
 .bestsellersContainer {
   direction: rtl;
   margin: 20px;
   position: relative;
 }
 
-/* HEADER: link on left, title+icon on right */
+/* —————————————————————————————
+   Header
+   ————————————————————————————— */
 .header {
   display: flex;
   justify-content: space-between;
@@ -13,17 +17,6 @@
   margin-bottom: 16px;
 }
 
-/* “View all” shop link */
-.shopLink {
-  font-size: 24px;
-  color: var(--primary-color);
-  text-decoration: none;
-  font-weight: 500;
-  border-bottom: 1px solid #000;
-  margin-left: 10px;
-}
-
-/* Title + icon wrapper */
 .titleContainer {
   display: flex;
   align-items: center;
@@ -31,31 +24,40 @@
   border-bottom: 1px solid #000;
 }
 
-/* Section title */
 .title {
-  font-size: 24px;
+  font-size: 22px;
+  font-weight: 600;
   color: var(--text-color, #333);
   margin: 0;
 }
 
-/* Trending icon */
 .icon {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   color: var(--text-color, #333);
-  transition: transform 0.2s;
+  transition: color 0.2s;
 }
-.titleContainer:hover .icon {
-  color: var(--highlight-color, #f90);
-}
+
+.titleContainer:hover .icon,
 .titleContainer:hover .title {
   color: var(--highlight-color, #f90);
 }
 
-/* ARROWS */
+.shopLink {
+  font-size: 16px;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid currentColor;
+  margin-left: 10px;
+}
+
+/* —————————————————————————————
+   Slider Arrows
+   ————————————————————————————— */
 .arrowLeft,
 .arrowRight {
   position: absolute;
-  top: calc(50% + 24px); /* 24px = header bottom margin */
+  top: 50%;
   transform: translateY(-50%);
   background: rgba(0, 0, 0, 0.4);
   border: none;
@@ -69,6 +71,7 @@
   cursor: pointer;
   z-index: 2;
 }
+
 .arrowLeft {
   right: 10px;
 }
@@ -84,19 +87,9 @@
   }
 }
 
-.shopLink {
-  font-size: 20px;
-}
-
-.title {
-  font-size: 20px;
-}
-
-.icon {
-  font-size: 20px;
-}
-
-/* SLIDER WRAPPER: hidden scrollbar */
+/* —————————————————————————————
+   Slider Wrapper
+   ————————————————————————————— */
 .sliderWrapper {
   overflow-x: auto;
   scroll-behavior: smooth;
@@ -110,24 +103,78 @@
   display: none;
 }
 
-/* SLIDER TRACK */
+/* —————————————————————————————
+   Slider Track
+   ————————————————————————————— */
 .slider {
   display: flex;
-  gap: 15px;
+  gap: 20px;
   padding: 10px 0;
 }
 
-/* EACH CARD */
+/* —————————————————————————————
+   Each Slide Item (fixed width)
+   ————————————————————————————— */
 .slideItem {
-  flex: 0 0 calc(20% - 15px);
-  box-sizing: border-box;
+  flex: 0 0 220px;   /* fixed width */
+  width: 220px;
   transition: transform 0.2s;
 }
 .slideItem:hover {
   transform: translateY(-4px);
 }
 
-/* LOADING & ERROR */
+/* Card wrapper inside each slide */
+.productCard {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  background: #fff;
+  overflow: hidden;
+  border: 1px solid #eee;
+  height: 100%;
+}
+
+/* Fixed image box with aspect ratio */
+.imageWrapper {
+  position: relative;
+  aspect-ratio: 4 / 5; /* consistent height */
+  overflow: hidden;
+}
+.image {
+  object-fit: cover;
+}
+
+/* Content area */
+.content {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Clamp product title to 2 lines */
+.productTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #222;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* show max 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: calc(1.4em * 2); /* reserve space for 2 lines */
+  line-height: 1.4;
+}
+
+.price {
+  font-size: 13px;
+  color: #555;
+}
+
+/* —————————————————————————————
+   Loading & Error
+   ————————————————————————————— */
 .loading,
 .error {
   text-align: center;
@@ -137,16 +184,24 @@
   color: red;
 }
 
+/* —————————————————————————————
+   Responsive
+   ————————————————————————————— */
 @media (max-width: 480px) {
-  .shopLink {
-    font-size: 16px;
-  }
-
   .title {
     font-size: 16px;
   }
-
   .icon {
     font-size: 16px;
+  }
+  .shopLink {
+    font-size: 14px;
+  }
+  .slideItem {
+    flex: 0 0 180px;
+    width: 180px;
+  }
+  .productTitle {
+    font-size: 13px;
   }
 }

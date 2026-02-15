@@ -1,8 +1,14 @@
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import ShopClient from "./ShopClient";
+import FooterMenu from "@/components/FooterMenu/FooterMenu";
 
 const API_BASE = "https://api.kimiatoranj.com/api/store";
+export const metadata = {
+  title: "فروشگاه صنایع دستی | کیمیا ترنج",
+  description:
+    "خرید آنلاین محصولات دست‌ساز ایرانی در کیمیا ترنج. دسته‌بندی‌ها، فیلترها و مرتب‌سازی پیشرفته؛ ارسال سریع و پشتیبانی دوستانه.",
+};
 
 export default async function ShopPage({ searchParams }) {
   // Convert to a plain object
@@ -41,6 +47,7 @@ export default async function ShopPage({ searchParams }) {
         initialHasMore={!!productsData.next}
       />
       <Footer />
+      <FooterMenu />
     </>
   );
 }

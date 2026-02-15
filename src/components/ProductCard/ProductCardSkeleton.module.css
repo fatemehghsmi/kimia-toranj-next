@@ -1,0 +1,160 @@
+.card {
+  display: grid;
+  grid-template-rows: auto auto auto auto;
+  row-gap: 8px;
+  width: 100%;
+  background-color: var(--bg-color, #ffffff);
+  border: 0.5px solid #94919188;
+  border-radius: 20px;
+  padding: 16px;
+  box-sizing: border-box;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0.7; }
+  to { opacity: 1; }
+}
+
+/* Image section with fixed aspect ratio */
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Title section */
+.titleSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-height: 52px; /* Reserve space for 2 lines */
+}
+
+.textLine {
+  width: 90%;
+  height: 18px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.textLineShort {
+  width: 70%;
+  height: 18px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Info row */
+.infoRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 24px;
+}
+
+.infoLine {
+  width: 40%;
+  height: 16px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Price section */
+.priceSection {
+  display: flex;
+  justify-content: center;
+}
+
+.price {
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .card {
+    padding: 12px;
+    row-gap: 6px;
+  }
+  
+  .textLine,
+  .textLineShort {
+    height: 16px;
+  }
+  
+  .price {
+    height: 36px;
+  }
+  
+  .titleSection {
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 10px;
+    border-radius: 16px;
+  }
+  
+  .imageWrapper {
+    border-radius: 12px;
+  }
+  
+  .image {
+    border-radius: 12px;
+  }
+  
+  .textLine,
+  .textLineShort {
+    height: 14px;
+  }
+  
+  .price {
+    height: 32px;
+    border-radius: 8px;
+  }
+  
+  .titleSection {
+    min-height: 44px;
+    gap: 4px;
+  }
+}
+
+/* Optional: Different animation delays for variety */
+.card:nth-child(2) .image { animation-delay: 0.1s; }
+.card:nth-child(3) .image { animation-delay: 0.2s; }
+.card:nth-child(4) .image { animation-delay: 0.3s; }

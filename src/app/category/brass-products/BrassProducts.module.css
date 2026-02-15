@@ -1,145 +1,84 @@
 .pageContainer {
   direction: rtl;
-  text-align: right;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  padding: 1rem;
 }
 
-/* ===== Hero Section ===== */
-.heroSection {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  margin: 2rem 0 3rem;
-  align-items: center;
-}
-
-.heroContent {
-  flex: 1 1 50%;
-}
-
-.heroTitle {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  line-height: 1.4;
+.title {
+  text-align: center;
   color: var(--primary-color);
 }
 
-.heroIntro {
-  font-size: 1rem;
+.seoSection {
+  direction: rtl;
+  text-align: right;
+  /* max-width: 1200px; */
+  margin: 40px auto;
+  padding: 20px;
   line-height: 1.8;
-  white-space: pre-line; /* preserve line breaks from template literal */
-  color: var(--text-color);
+  font-size: 1rem;
+  color: #333;
+  background-color: #fafafa;
+  border-radius: 8px;
 }
 
-.heroImage {
-  flex: 1 1 40%;
-  display: flex;
-  justify-content: center;
+.seoSection h2 {
+  font-size: 1.4rem;
+  margin: 32px 0 16px;
+  font-weight: 700;
+  color: #222;
+  border-right: 4px solid var(--primary-color, #c49a6c);
+  padding-right: 8px;
 }
 
-.heroImg {
+.seoSection h3 {
+  font-size: 1.2rem;
+  margin: 24px 0 12px;
+  font-weight: 600;
+  color: #444;
+}
+
+.seoSection p {
+  margin-bottom: 16px;
+  color: #555;
+}
+
+.seoSection ul,
+.seoSection ol {
+  margin: 16px 0 24px;
+  padding-right: 20px;
+}
+
+.seoSection ul li,
+.seoSection ol li {
+  margin-bottom: 10px;
+  line-height: 1.7;
+  color: #444;
+}
+
+.seoSection strong {
+  color: var(--primary-color, #c49a6c);
+}
+
+.seoSection img {
   max-width: 100%;
   height: auto;
-  border-radius: 8px;
-  object-fit: cover;
-}
-
-/* ===== Sections ===== */
-.section {
-  margin-bottom: 3rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid #eee;
-}
-
-.sectionTitle {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  color: var(--primary-color);
-}
-
-.sectionIntro {
-  font-size: 1rem;
-  line-height: 1.8;
-  margin-bottom: 1.5rem;
-  color: var(--text-color);
-}
-
-/* ===== Item Lists ===== */
-.itemList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.item {
-  margin-bottom: 1rem;
-  padding-right: 1.2rem; /* RTL adjustment */
-  position: relative;
-}
-
-.item::before {
-  content: "•";
-  position: absolute;
-  right: 0; /* RTL bullet position */
-  color: var(--secondary-color); /* gold bullet */
-  font-size: 1.2rem;
-  line-height: 1;
-}
-
-.itemTitle {
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin-bottom: 0.3rem;
-  color: var(--primary-color);
-}
-
-/* ===== FAQ Styles ===== */
-.faqList {
-  margin-top: 1rem;
-}
-
-.faqItem {
-  margin-bottom: 1rem;
-  border: 1px solid #ddd;
+  margin: 20px 0;
   border-radius: 6px;
-  overflow: hidden;
 }
 
-.faqQuestion {
-  font-weight: bold;
-  padding: 0.8rem 1rem;
-  background-color: var(--primary-color-light);
-  color: var(--primary-color);
-  cursor: pointer;
-}
-
-.faqAnswer {
-  padding: 0.8rem 1rem;
-  background-color: var(--bg-color);
-  line-height: 1.6;
-  color: var(--text-color);
-}
-
-/* ===== Responsive ===== */
 @media (max-width: 768px) {
-  .heroSection {
-    flex-direction: column;
+  .pageContainer {
+    margin-top: 60px;
+  }
+  .seoSection {
+    padding: 15px;
+    font-size: 0.95rem;
   }
 
-  .heroContent,
-  .heroImage {
-    flex: 1 1 100%;
+  .seoSection h2 {
+    font-size: 1.2rem;
   }
 
-  .heroTitle {
-    font-size: 1.6rem;
-  }
-
-  .sectionTitle {
-    font-size: 1.3rem;
+  .seoSection h3 {
+    font-size: 1.05rem;
   }
 }

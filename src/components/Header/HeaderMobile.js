@@ -87,6 +87,7 @@ export default function HeaderMobile() {
   const handleSuggestionClick = (prod) => {
     router.push(`/product/${prod.url_title}-${prod.id}`);
     setShowSuggestions(false);
+    setSearchTerm("");
   };
 
   return (
@@ -97,51 +98,66 @@ export default function HeaderMobile() {
           src="/logo.png"
           alt="کیمیاترنج"
           className={styles.logo}
-          width={120} // ✅ required in next/image
-          height={40} // adjust to your actual logo ratio
-          priority // optional: preload for faster LCP
+          width={120}
+          height={40}
+          priority
         />
       </Link>
 
       {/* Search box */}
-      <form
-        className={styles.searchContainer}
-        onSubmit={handleSearchSubmit}
-        ref={suggestionsRef}
-      >
-        <div className={styles.searchBox} dir="rtl">
-          <input
-            type="text"
-            placeholder="در کیمیاترنج جستجو کنید ..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onFocus={() => {
-              if (suggestions.length) setShowSuggestions(true);
-            }}
-          />
-          <button type="submit" className={styles.searchButton}>
-            <IoSearch className={styles.searchIcon} />
-          </button>
-        </div>
+      <div className={styles.searchContainer} ref={suggestionsRef}>
+  <form className={styles.searchBox} onSubmit={handleSearchSubmit} dir="rtl">
+    <input
+      type="text"
+      placeholder="در کیمیاترنج جستجو کنید ..."
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+      onFocus={() => {
+        if (suggestions.length) setShowSuggestions(true);
+      }}
+    />
+    <button type="submit" className={styles.searchButton}>
+      <IoSearch className={styles.searchIcon} />
+    </button>
+  </form>
 
-        {showSuggestions && suggestions.length > 0 && (
-          <ul className={styles.suggestionsList}>
-            {suggestions.map((prod) => (
-              <li
-                key={prod.id}
-                className={styles.suggestionItem}
-                onClick={() => handleSuggestionClick(prod)}
-              >
-                <div className={styles.suggestionTitle}>{prod.title}</div>
-                <div className={styles.suggestionMeta}>
-                  {prod.collection?.title} •{" "}
-                  {formatPrice(prod.variants?.[0]?.price)} تومان
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
-      </form>
+  {showSuggestions && suggestions.length > 0 && (
+    <ul className={styles.suggestionsList}>
+      {suggestions.map((prod) => (
+        <li
+          key={prod.id}
+          className={styles.suggestionItem}
+          onClick={() => handleSuggestionClick(prod)}
+        >
+          <div className={styles.suggestionContent}>
+            {/* تصویر محصول */}
+            {prod.images && prod.images.length > 0 && prod.images[0].image ? (
+              <div className={styles.suggestionImage}>
+                <img
+                  src={prod.images[0].image}
+                  alt={prod.title}
+                  className={styles.productImage}
+                />
+              </div>
+            ) : (
+              <div className={styles.noImage}>
+                بدون تصویر
+              </div>
+            )}
+
+            <div className={styles.suggestionText}>
+              <div className={styles.suggestionTitle}>{prod.title}</div>
+              <div className={styles.suggestionMeta}>
+                {prod.collection?.title} {" "}
+                {formatPrice(prod.variants?.[0]?.price)} تومان
+              </div>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  )}
+</div>
 
       {/* Hamburger toggle */}
       {!isMenuOpen && (
@@ -171,11 +187,6 @@ export default function HeaderMobile() {
               <li className={styles.menuItem}>
                 <Link href="/" onClick={() => setIsMenuOpen(false)}>
                   صفحه اصلی
-                </Link>
-              </li>
-              <li className={styles.menuItem}>
-                <Link href="/about" onClick={() => setIsMenuOpen(false)}>
-                  درباره ما
                 </Link>
               </li>
               <li className={styles.menuItem}>

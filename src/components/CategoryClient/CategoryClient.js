@@ -2,6 +2,7 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 import ProductCard from "@/components/ProductCard/ProductCard";
+import ProductCardSkeleton from "@/components/ProductCard/ProductCard.Skeleton";
 import styles from "./CategoryClient.module.css";
 
 const API_URL = "https://api.kimiatoranj.com/";
@@ -16,6 +17,7 @@ export default function CategoryClient({
   const [hasMore, setHasMore] = useState(initialHasMore);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [initialLoading, setInitialLoading] = useState(!initialProducts.length);
 
   const observer = useRef();
 
@@ -48,6 +50,7 @@ export default function CategoryClient({
         if (!active) return;
         setProducts((prev) => [...prev, ...data.results]);
         setHasMore(data.next !== null);
+        setInitialLoading(false);
       })
       .catch(() => {
         if (active) setError("خطا در دریافت محصولات");
@@ -61,11 +64,20 @@ export default function CategoryClient({
     };
   }, [page, categoryName]);
 
+  // اسکلتون برای لودینگ اولیه
+  const renderSkeletons = (count = 8) => {
+    return Array.from({ length: count }, (_, index) => (
+      <ProductCardSkeleton key={`skeleton-${index}`} />
+    ));
+  };
+
   return (
     <section className={styles.productGridSection}>
       <div className={styles.container}>
-        {products.length === 0 && loading ? (
-          <div className={styles.loading}>در حال بارگذاری...</div>
+        {initialLoading ? (
+          <div className={styles.productGrid}>
+            {renderSkeletons()}
+          </div>
         ) : error ? (
           <div className={styles.error}>{error}</div>
         ) : products.length === 0 ? (
@@ -80,9 +92,10 @@ export default function CategoryClient({
                 </div>
               );
             })}
-            {loading && (
-              <div className={styles.loading}>در حال بارگذاری...</div>
-            )}
+            
+            {/* اسکلتون برای لودینگ صفحات بعدی */}
+            {loading && renderSkeletons(4)}
+            
             {!hasMore && products.length > 0 && (
               <div className={styles.endMessage}>
                 هیچ محصول بیشتری موجود نیست

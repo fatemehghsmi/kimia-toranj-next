@@ -15,9 +15,8 @@ const nextConfig = {
     ],
   },
 
-  experimental: {
-    turbo: false, // ⛔ disable Turbopack to avoid font fetch build errors
-  },
 };
 
 export default nextConfig;
+
+

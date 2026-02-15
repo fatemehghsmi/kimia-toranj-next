@@ -1,145 +1,153 @@
 .pageContainer {
   direction: rtl;
-  text-align: right;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  padding: 1rem;
+  padding: 20px;
 }
 
-/* ===== Hero Section ===== */
-.heroSection {
+/* Page title */
+.title {
+  text-align: center;
+  color: var(--primary-color);
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+/* Grid row for subcollections */
+.collectionsRow {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
-  margin: 2rem 0 3rem;
-  align-items: center;
-}
-
-.heroContent {
-  flex: 1 1 50%;
-}
-
-.heroTitle {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  line-height: 1.4;
-  color: var(--primary-color);
-}
-
-.heroIntro {
-  font-size: 1rem;
-  line-height: 1.8;
-  white-space: pre-line; /* preserve line breaks from template literal */
-  color: var(--text-color);
-}
-
-.heroImage {
-  flex: 1 1 40%;
-  display: flex;
   justify-content: center;
+  gap: 15px;
+  margin-bottom: 40px;
 }
 
-.heroImg {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  object-fit: cover;
-}
-
-/* ===== Sections ===== */
-.section {
-  margin-bottom: 3rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid #eee;
-}
-
-.sectionTitle {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  color: var(--primary-color);
-}
-
-.sectionIntro {
-  font-size: 1rem;
-  line-height: 1.8;
-  margin-bottom: 1.5rem;
-  color: var(--text-color);
-}
-
-/* ===== Item Lists ===== */
-.itemList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.item {
-  margin-bottom: 1rem;
-  padding-right: 1.2rem; /* RTL adjustment */
+/* Card style (same as Collections) */
+.collectionCard {
   position: relative;
-}
-
-.item::before {
-  content: "•";
-  position: absolute;
-  right: 0; /* RTL bullet position */
-  color: var(--secondary-color); /* gold bullet */
-  font-size: 1.2rem;
-  line-height: 1;
-}
-
-.itemTitle {
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin-bottom: 0.3rem;
-  color: var(--primary-color);
-}
-
-/* ===== FAQ Styles ===== */
-.faqList {
-  margin-top: 1rem;
-}
-
-.faqItem {
-  margin-bottom: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  width: calc((100% - 5 * 15px) / 6); /* 6 per row desktop */
+  aspect-ratio: 0.8;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: transform 0.3s ease;
   overflow: hidden;
 }
 
-.faqQuestion {
-  font-weight: bold;
-  padding: 0.8rem 1rem;
-  background-color: var(--primary-color-light);
-  color: var(--primary-color);
-  cursor: pointer;
+.collectionCard:hover {
+  transform: scale(1.03);
 }
 
-.faqAnswer {
-  padding: 0.8rem 1rem;
-  background-color: var(--bg-color);
-  line-height: 1.6;
-  color: var(--text-color);
+.collectionImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
 }
 
-/* ===== Responsive ===== */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--primary-color-dark, rgba(0,0,0,0.4));
+  border-radius: 8px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.description {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Tablet: 4 per row */
+@media (max-width: 1024px) {
+  .collectionCard {
+    width: calc((100% - 3 * 15px) / 4);
+  }
+}
+
+/* Mobile: 3 per row */
 @media (max-width: 768px) {
-  .heroSection {
-    flex-direction: column;
+  .collectionCard {
+    width: calc((100% - 2 * 15px) / 3);
   }
-
-  .heroContent,
-  .heroImage {
-    flex: 1 1 100%;
+  .description {
+    font-size: 12px;
   }
+}
 
-  .heroTitle {
-    font-size: 1.6rem;
+/* SEO content section */
+.seoSection {
+  direction: rtl;
+  text-align: right;
+  margin: 40px auto;
+  padding: 20px;
+  line-height: 1.8;
+  font-size: 1rem;
+  color: #333;
+  background-color: #fafafa;
+  border-radius: 8px;
+}
+
+.seoSection h2 {
+  font-size: 1.4rem;
+  margin: 32px 0 16px;
+  font-weight: 700;
+  color: #222;
+  border-right: 4px solid var(--primary-color, #c49a6c);
+  padding-right: 8px;
+}
+
+.seoSection h3 {
+  font-size: 1.2rem;
+  margin: 24px 0 12px;
+  font-weight: 600;
+  color: #444;
+}
+
+.seoSection p {
+  margin-bottom: 16px;
+  color: #555;
+}
+
+.seoSection ul,
+.seoSection ol {
+  margin: 16px 0 24px;
+  padding-right: 20px;
+}
+
+.seoSection li {
+  margin-bottom: 10px;
+  line-height: 1.7;
+  color: #444;
+}
+
+.seoSection strong {
+  color: var(--primary-color, #c49a6c);
+}
+
+.seoSection img {
+  max-width: 100%;
+  height: auto;
+  margin: 20px 0;
+  border-radius: 6px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .pageContainer {
+    margin-top: 60px;
   }
-
-  .sectionTitle {
-    font-size: 1.3rem;
+  .seoSection {
+    padding: 15px;
+    font-size: 0.95rem;
+  }
+  .seoSection h2 {
+    font-size: 1.2rem;
+  }
+  .seoSection h3 {
+    font-size: 1.05rem;
   }
 }

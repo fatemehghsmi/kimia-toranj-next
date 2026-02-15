@@ -3,7 +3,6 @@ import Image from "next/image";
 import styles from "./SpecialOffer.module.css";
 import { toPersianDigits } from "@/utils/faDigits";
 
-
 export default function SpecialOffer() {
   // numeric values
   const price = 113000000;
@@ -15,16 +14,16 @@ export default function SpecialOffer() {
     <div className={styles.container}>
       {/* Right side */}
       <div className={styles.rightDiv}>
-        <h1 className={styles.title}>کاسه بشقاب لاله</h1>
+        <h2 className={styles.title}>کاسه بشقاب لاله</h2>
         <p className={styles.description}>
           <span>
-            کار فاخر و خاص، جنس محصول برنج ضخیم، قلمزنی صورت با روکش قلع،
-            دور رنگ کارشده و تماما دست ساز، دارای شناسنامه
+            کار فاخر و خاص، جنس محصول برنج ضخیم، قلمزنی صورت با روکش قلع، دور
+            رنگ کارشده و تماما دست ساز، دارای شناسنامه
           </span>
           <span>
-            قطر بشقاب {toPersianDigits(plateDiameter)} سانتی‌متر،
-            دهانه کاسه {toPersianDigits(bowlDiameter)} سانتی‌متر،
-            ارتفاع {toPersianDigits(bowlHeight)} سانتی‌متر
+            قطر بشقاب {toPersianDigits(plateDiameter)} سانتی‌متر، دهانه کاسه{" "}
+            {toPersianDigits(bowlDiameter)} سانتی‌متر، ارتفاع{" "}
+            {toPersianDigits(bowlHeight)} سانتی‌متر
           </span>
         </p>
         <div className={styles.priceContainer}>

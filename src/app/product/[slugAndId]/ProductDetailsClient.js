@@ -137,6 +137,8 @@ export default function ProductDetailsClient({ initialProduct }) {
               stock={variant.stock || 0}
               orderCount={product.order_count}
             />
+        <IconsBox isLiked={like} onLikeClick={likeHandler} />
+
           </div>
 
           <ProductTabs
@@ -148,10 +150,9 @@ export default function ProductDetailsClient({ initialProduct }) {
           />
         </div>
 
-        <IconsBox isLiked={like} onLikeClick={likeHandler} />
+        <SimilarProducts productId={id} />
         <ProductRating rating={product.average_rating || 0} />
         <ReviewForm productId={id} />
-        <SimilarProducts productId={id} />
       </div>
     </div>
   );
